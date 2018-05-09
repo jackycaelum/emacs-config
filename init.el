@@ -61,7 +61,9 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-	(tide org ox-gfm multiple-cursors ac-clang smart-tabs-mode bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete))))
+	(org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang smart-tabs-mode bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
+ '(python-shell-interpreter "python")
+ '(truncate-lines nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -122,6 +124,8 @@
 (require 'golden-ratio)
 (golden-ratio-mode 1)
 
+(visual-line-mode 1)
+
 (eval-after-load "gud"
   '(progn
 	(local-unset-key (kbd "C-x C-a"))
@@ -144,3 +148,23 @@
 (add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(when (require 'org-tree-slide nil t)
+  (global-set-key (kbd "<f8>") 'org-tree-slide-mode)
+  (global-set-key (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle)
+  (define-key org-tree-slide-mode-map (kbd "<f7>")
+    'org-tree-slide-move-previous-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f9>")
+    'org-tree-slide-move-next-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f10>")
+    'org-tree-slide-content)
+  (setq org-tree-slide-skip-outline-level 4)
+  (org-tree-slide-narrowing-control-profile)
+  (setq org-tree-slide-skip-done nil))
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'color-theme)
+(setq color-theme-is-global t)
+(color-theme-initialize)
+(load "color-theme-manoj")
+(set-default 'truncate-lines t)

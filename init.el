@@ -14,6 +14,9 @@
 
 (setq-default tab-width 4)
 
+(setq package-list '(auto-complete multiple-cursors go-mode magit golden-ratio color-theme))
+
+
 (global-set-key (kbd "C-x C-b") 'ibuffer)
     (autoload 'ibuffer "ibuffer" "List buffers." t)
 
@@ -38,7 +41,19 @@
 (electric-pair-mode 1)
 (electric-indent-mode 1)
 (column-number-mode 1)
-(smart-tabs-insinuate 'c 'javascript 'c++ )
+
+;; el-get
+;(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;
+;(unless (require 'el-get nil 'noerror)
+;  (with-current-buffer
+;      (url-retrieve-synchronously
+;       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+;    (goto-char (point-max))
+;    (eval-print-last-sexp)))
+;
+;(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+;(el-get 'sync)
 
 
 (global-set-key (kbd "C-x C-a") 'magit-status)
@@ -61,7 +76,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-	(org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang smart-tabs-mode bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
+	(golden-ratio org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
  '(python-shell-interpreter "python")
  '(truncate-lines nil))
 (custom-set-faces
@@ -70,6 +85,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(unless package-archive-contents
+  (package-refresh-contents))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
 (ac-config-default)
 
 (require 'multiple-cursors)
@@ -107,19 +129,6 @@
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
 
-
-;; el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
 
 (require 'golden-ratio)
 (golden-ratio-mode 1)
@@ -163,8 +172,8 @@
   (setq org-tree-slide-skip-done nil))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(require 'color-theme)
-(setq color-theme-is-global t)
-(color-theme-initialize)
-(load "color-theme-manoj")
+;(require 'color-theme)
+;(setq color-theme-is-global t)
+;(color-theme-initialize)
+;(load "color-theme-manoj")
 (set-default 'truncate-lines t)

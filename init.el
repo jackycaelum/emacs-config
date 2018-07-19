@@ -13,7 +13,8 @@
       c-basic-offset 4)
 
 (setq-default tab-width 4)
-
+(setq dired-recursive-deletes 'always)
+(setq dired-recursive-copies 'always)
 (setq package-list '(auto-complete multiple-cursors go-mode magit golden-ratio color-theme))
 
 
@@ -76,7 +77,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-	(golden-ratio org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
+	(rust-mode golden-ratio org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
  '(python-shell-interpreter "python")
  '(truncate-lines nil))
 (custom-set-faces

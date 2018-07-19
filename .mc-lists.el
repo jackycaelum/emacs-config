@@ -20,6 +20,7 @@
 		ibuffer
 		sgml-slash
 		wdired-exit
+		wdired-finish-edit
 		xterm-paste
 		))
 

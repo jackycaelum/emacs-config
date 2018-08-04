@@ -19,12 +19,12 @@
 (add-hook 'write-file-hooks 
           (lambda () (if (not indent-tabs-mode)
                          (untabify (point-min) (point-max)))
-			nil))
+            nil))
 
 (setq-default tab-width 4)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
-(setq package-list '(auto-complete multiple-cursors go-mode magit golden-ratio color-theme go-autocomplete yaml-mode))
+(setq package-list '(auto-complete multiple-cursors go-mode magit golden-ratio color-theme go-autocomplete yaml-mode toml toml-mode))
 
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -73,7 +73,7 @@
             (add-hook 'before-save-hook 'gofmt-before-save)
             (setq tab-width 4)
             (setq indent-tabs-mode 1)
-    	    (electric-pair-mode 1)))
+            (electric-pair-mode 1)))
  
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -86,7 +86,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-	(yaml-mode rust-mode golden-ratio org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
+    (toml toml-mode yaml-mode rust-mode golden-ratio org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
  '(python-shell-interpreter "python")
  '(truncate-lines nil))
 (custom-set-faces
@@ -147,8 +147,8 @@
 
 (eval-after-load "gud"
   '(progn
-	(local-unset-key (kbd "C-x C-a"))
-	(local-set-key (kbd "C-c C-a") 'magit-status)))
+    (local-unset-key (kbd "C-x C-a"))
+    (local-set-key (kbd "C-c C-a") 'magit-status)))
 
 (setq dired-listing-switches "-alh")
 

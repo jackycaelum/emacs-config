@@ -15,7 +15,7 @@
 (setq-default tab-width 4)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
-(setq package-list '(auto-complete multiple-cursors go-mode magit golden-ratio color-theme))
+(setq package-list '(auto-complete multiple-cursors go-mode magit golden-ratio color-theme go-autocomplete))
 
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)

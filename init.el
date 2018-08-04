@@ -12,6 +12,15 @@
 (setq c-default-style "linux"
       c-basic-offset 4)
 
+;; no tabs by default. modes that really need tabs should enable
+;; indent-tabs-mode explicitly. makefile-mode already does that, for
+;; example.
+(setq-default indent-tabs-mode nil)
+(add-hook 'write-file-hooks 
+          (lambda () (if (not indent-tabs-mode)
+                         (untabify (point-min) (point-max)))
+			nil))
+
 (setq-default tab-width 4)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)

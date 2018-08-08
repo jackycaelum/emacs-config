@@ -24,7 +24,7 @@
 (setq-default tab-width 4)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
-(setq package-list '(auto-complete multiple-cursors go-mode magit golden-ratio color-theme go-autocomplete yaml-mode toml toml-mode))
+(setq package-list '(auto-complete multiple-cursors origami go-mode magit golden-ratio color-theme go-autocomplete yaml-mode toml toml-mode))
 
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -86,7 +86,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (toml toml-mode yaml-mode rust-mode golden-ratio org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
+    (origami toml toml-mode yaml-mode rust-mode golden-ratio org-tree-slide epresent tide org ox-gfm multiple-cursors ac-clang bison-mode undo-tree rainbow-mode rainbow-delimiters rjsx-mode magit go-autocomplete exec-path-from-shell go-mode auto-complete)))
  '(python-shell-interpreter "python")
  '(truncate-lines nil))
 (custom-set-faces
@@ -145,10 +145,10 @@
 
 (visual-line-mode 1)
 
-(eval-after-load "gud"
-  '(progn
-    (local-unset-key (kbd "C-x C-a"))
-    (local-set-key (kbd "C-c C-a") 'magit-status)))
+;(eval-after-load "gud"
+;  '(progn
+;    (local-unset-key (kbd "C-x C-a"))
+;    (local-set-key (kbd "C-c C-a") 'magit-status)))
 
 (setq dired-listing-switches "-alh")
 
@@ -187,3 +187,11 @@
 ;(color-theme-initialize)
 ;(load "color-theme-manoj")
 (set-default 'truncate-lines t)
+
+;; Configure origami
+(require 'origami)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'go-mode)
+              (origami-mode 1))))
+(define-key origami-mode-map (kbd "C-q") 'origami-recursively-toggle-node)

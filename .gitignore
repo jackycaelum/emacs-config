@@ -45,3 +45,5 @@ flycheck_*.el
 .dir-locals.el
 
 /el-get/
+
+ac-comphist.dat
